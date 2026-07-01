@@ -1,0 +1,1 @@
+pip install pyyaml xmltodict PyQt5 pyinstaller
