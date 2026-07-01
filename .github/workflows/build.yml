@@ -1,0 +1,35 @@
+name: Budowanie Projektu
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 12 * * 0' 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Pobranie repozytorium
+        uses: actions/checkout@v3
+
+      - name: Konfiguracja Pythona
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalacja komponentow
+        shell: powershell
+        run: .\installResources.ps1
+
+      - name: Budowanie pliku EXE
+        shell: powershell
+        run: pyinstaller.exe --onefile --noconsole project.py
+
+      - name: Przeslanie gotowego pliku
+        uses: actions/upload-artifact@v3
+        with:
+          name: Program-Konwerter
+          path: dist/project.exe
