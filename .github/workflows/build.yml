@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Pobranie repozytorium
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Konfiguracja Pythona
         uses: actions/setup-python@v4
@@ -29,7 +29,7 @@ jobs:
         run: pyinstaller.exe --onefile --noconsole project.py
 
       - name: Przeslanie gotowego pliku
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Program-Konwerter
           path: dist/project.exe
